@@ -1,0 +1,83 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - about_us
+  - room_suggestion
+actions:
+  - action_get_suggestion
+entities:
+  - checkin_date
+  - num_guest
+  - checkout_date
+
+slots:
+  checkin_date:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: checkin_date
+  num_guest:
+    type: text
+    mappings:
+    - type: from_entity
+        entity: num_guest
+  checkout_date:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: checkout_date
+
+forms:
+  suggestion_form:
+    required_slots:
+       - checkin_date
+       - num_guest
+       - checkout_date
+
+responses:
+  utter_ask_checkin_date:
+  - text: "When are you checking in?"
+  utter_ask_checkout_date:
+  - text: "When are you checking out?"
+  utter_ask_num_guest:
+  - text: "How many guest do you have?"
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+  utter_await:
+  - text: "Wait a moment as give you suggestions"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+  utter_welcome:
+  - text: "What can help you with today?"
+    buttons:
+    - title: "Get room recomendation"
+      payload: "/room_suggestion"
+    - title: "Know about us"
+      payload: "/about_us"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+  utter_about:
+  - text: "We are company dedicated to help you with room suggestions"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
