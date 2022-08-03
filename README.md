@@ -1,1 +1,2 @@
-gggg
+### Set Up
+- Download Hong

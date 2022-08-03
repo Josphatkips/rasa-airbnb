@@ -5,8 +5,8 @@ stories:
 - story: happy path
   steps:
   - intent: greet
-  - action: utter_greet
-  - action: utter_welcome
+  # - action: utter_greet
+  - action: action_get_suggestion
 
 # - story: sad path 1
 #   steps:

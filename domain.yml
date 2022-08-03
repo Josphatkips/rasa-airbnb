@@ -18,6 +18,11 @@ entities:
   - checkout_date
 
 slots:
+  checkout_date:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: checkout_date
   checkin_date:
     type: text
     mappings:
@@ -27,19 +32,15 @@ slots:
     type: text
     mappings:
     - type: from_entity
-        entity: num_guest
-  checkout_date:
-    type: text
-    mappings:
-    - type: from_entity
-      entity: checkout_date
+      entity: num_guest
 
 forms:
   suggestion_form:
     required_slots:
-       - checkin_date
-       - num_guest
-       - checkout_date
+        - checkin_date
+        - num_guest
+        - checkout_date
+ 
 
 responses:
   utter_ask_checkin_date:

@@ -27,9 +27,40 @@ class ActionGetSuggestion(Action):
         mylist=[10]
 
         ls=df.loc[df['accommodates'].isin(mylist)]
+        buttons = []
+        myelements=[]
         for index, row in ls.iterrows():
-            print(row['accommodates'], row['amenities'])
+            # print(row['accommodates'], row['amenities'])
+            # payload = "/product{\"product_id\":\"" + str(row['id']) + "\"}"
+        
+            newobj={
+                    "title": row['name'],
+                    "subtitle": row['description'],
+                    "image_url": row['picture_url'],
+                    "buttons": [ 
+                        {
+                        "title": "Buy now",
+                        "url": row['listing_url'],
+                        "type": "web_url"
+                        # "type": "postback",
+                        # "payload":payload
+                        }
+                    ]
+                }
+            myelements.append(newobj)
+        message = {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": myelements
+                        
+                        }
+                    }
 
-        dispatcher.utter_message(text="Hello World!")
+        print('message')
+        # print(message)
+        dispatcher.utter_message(attachment=message)
+
+        # dispatcher.utter_message(text="Hello World!")
 
         return []
