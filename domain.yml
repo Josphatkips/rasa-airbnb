@@ -27,33 +27,42 @@ entities:
 slots:
   email:
     type: text
+    # influence_conversation: true
     mappings:
     - type: from_text
       conditions:
       - active_loop: bulksms_form
   num_guest:
     type: text
+    influence_conversation: true
     mappings:
     - type: from_text
       conditions:
       - active_loop: suggestion_form
-
-
+        requested_slot: num_guest
   checkout_date:
     type: text
+    influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: checkout_date
+    - type: from_text
+      conditions:
+      - active_loop: suggestion_form
+        requested_slot: checkout_date
+  checkin_date:
+    influence_conversation: true
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: suggestion_form
+        requested_slot: checkin_date
+
   room_id:
     type: text
     mappings:
     - type: from_entity
       entity: room_id
-  checkin_date:
-    type: text
-    mappings:
-    - type: from_entity
-      entity: checkin_date
+  
 
 
 forms:
@@ -63,9 +72,10 @@ forms:
       - num_guest
   suggestion_form:
     required_slots:
-        # - checkin_date
+        - checkin_date
+        - checkout_date
         - num_guest
-        # - checkout_date
+        
  
 
 responses:

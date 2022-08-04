@@ -59,18 +59,7 @@ class ActionGetSuggestion(Action):
         buttons = []
         myelements=[]
         for index, row in ls.iterrows():
-            print(row['id'])
-            # print('1.+++++++++++++++++++++++++++++++++++++++')
-            # print(row['listing_url'])
-            # print('2.+++++++++++++++++++++++++++++++++++++++')
-            # print(row['name'])
-            # print('3.+++++++++++++++++++++++++++++++++++++++')
-            # # print(row['description'])
-            # # print('4. +++++++++++++++++++++++++++++++++++++++')
-            # print(row['picture_url'])
-            # print('4. +++++++++++++++++++++++++++++++++++++++')
-            # print(row['listing_url'])
-            # print('5. +++++++++++++++++++++++++++++++++++++++')
+            
             payload = "/room{\"room_id\":\"" + str(row['id']) + "\"}"
         
             newobj={
@@ -104,13 +93,8 @@ class ActionGetSuggestion(Action):
                         }
                     }
 
-        print('message22')
-        # print(message)
+       
         dispatcher.utter_message(attachment=message)
-
-        print("hello")
-        
-
         dispatcher.utter_message(text="Hello World!")
 
         return []
