@@ -52,13 +52,13 @@ class ActionGetSuggestion(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         excel_file = 'hongkong.csv'
         df = pd.read_csv(excel_file)
-        mylist=[1]
+        mylist=[10]
 
         ls=df.loc[df['accommodates'].isin(mylist)]
         buttons = []
         myelements=[]
         for index, row in ls.iterrows():
-            # print(row['id'])
+            print(row['id'])
             # print('1.+++++++++++++++++++++++++++++++++++++++')
             # print(row['listing_url'])
             # print('2.+++++++++++++++++++++++++++++++++++++++')
@@ -78,7 +78,7 @@ class ActionGetSuggestion(Action):
                     "image_url": row['picture_url'],
                     "buttons": [ 
                         {
-                        "title": "View",
+                        "title": "View on web",
                         "url": row['listing_url'],
                         "type": "web_url"
                         # "type": "postback",
@@ -103,10 +103,13 @@ class ActionGetSuggestion(Action):
                         }
                     }
 
-        print('message')
+        print('message22')
         # print(message)
         dispatcher.utter_message(attachment=message)
 
-        # dispatcher.utter_message(text="Hello World!")
+        print("hello")
+        
+
+        dispatcher.utter_message(text="Hello World!")
 
         return []
