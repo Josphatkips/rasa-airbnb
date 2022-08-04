@@ -52,7 +52,8 @@ class ActionGetSuggestion(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         excel_file = 'hongkong.csv'
         df = pd.read_csv(excel_file)
-        mylist=[10]
+        mylist=[int(tracker.get_slot('num_guest'))]
+        print(tracker.get_slot('num_guest'))
 
         ls=df.loc[df['accommodates'].isin(mylist)]
         buttons = []

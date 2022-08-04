@@ -11,6 +11,8 @@ intents:
   - about_us
   - room_suggestion
   - room
+  - bulksms_register
+  - get_started
 actions:
   - action_get_suggestion
   - action_get_room
@@ -19,8 +21,24 @@ entities:
   - num_guest
   - checkout_date
   - room_id
+  - email
+  - username
 
 slots:
+  email:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: bulksms_form
+  num_guest:
+    type: text
+    mappings:
+    - type: from_text
+      conditions:
+      - active_loop: suggestion_form
+
+
   checkout_date:
     type: text
     mappings:
@@ -36,18 +54,18 @@ slots:
     mappings:
     - type: from_entity
       entity: checkin_date
-  num_guest:
-    type: text
-    mappings:
-    - type: from_entity
-      entity: num_guest
+
 
 forms:
+  bulksms_form:
+    required_slots:
+      - email
+      - num_guest
   suggestion_form:
     required_slots:
-        - checkin_date
+        # - checkin_date
         - num_guest
-        - checkout_date
+        # - checkout_date
  
 
 responses:
@@ -59,6 +77,8 @@ responses:
   - text: "How many guest do you have?"
   utter_greet:
   - text: "Hey! How are you?"
+  utter_ask_email:
+  - text: "Enter email?"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -71,6 +91,8 @@ responses:
 
   utter_happy:
   - text: "Great, carry on!"
+  utter_registered:
+  - text: "Thanks for registering"
 
   utter_goodbye:
   - text: "Bye"

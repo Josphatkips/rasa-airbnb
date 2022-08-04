@@ -16,6 +16,22 @@ rules:
 #   - action: utter_about
 #   - action: utter_welcome
 
+# - rule: activate bulk sms form
+#   steps:
+#   - intent: bulksms_register
+#   - action: bulksms_form
+#   - active_loop: bulksms_form
+
+# - rule: Submit Bulksms form
+#   condition:
+#   - active_loop: bulksms_form
+#   steps:
+#   - action: bulksms_form
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null
+#   - action: action_get_suggestion
+
 
 
 

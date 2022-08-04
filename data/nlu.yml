@@ -98,3 +98,14 @@ nlu:
   examples: |
     - [1](room_id)
     - [20](room_id)
+- intent: bulksms_register
+  examples: |
+    - Royce bulksms
+    - Royce bulk sms
+    - bulk sms
+- intent: get_started
+  examples: |
+    - I need assistance
+    - Help Me
+    - Started
+    - get started
