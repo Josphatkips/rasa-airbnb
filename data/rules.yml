@@ -6,6 +6,10 @@ rules:
   steps:
   - intent: goodbye
   - action: utter_goodbye
+- rule: show room Id
+  steps:
+  - intent: room
+  - action: action_get_room
 # - rule: Always response with about us
 #   steps:
 #   - intent: about_us

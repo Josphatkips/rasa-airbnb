@@ -94,3 +94,7 @@ nlu:
     - Help me get a room?
     - Give me suggestion?
     - Room suggestion?
+- intent: room
+  examples: |
+    - [1](room_id)
+    - [20](room_id)

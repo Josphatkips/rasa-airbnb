@@ -10,12 +10,15 @@ intents:
   - bot_challenge
   - about_us
   - room_suggestion
+  - room
 actions:
   - action_get_suggestion
+  - action_get_room
 entities:
   - checkin_date
   - num_guest
   - checkout_date
+  - room_id
 
 slots:
   checkout_date:
@@ -23,6 +26,11 @@ slots:
     mappings:
     - type: from_entity
       entity: checkout_date
+  room_id:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: room_id
   checkin_date:
     type: text
     mappings:

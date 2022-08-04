@@ -17,6 +17,34 @@ from rasa_sdk.executor import CollectingDispatcher
 class ActionGetSuggestion(Action):
 
     def name(self) -> Text:
+        return "action_get_room"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            excel_file = 'hongkong.csv'
+            df = pd.read_csv(excel_file)
+            mylist=[int(tracker.get_slot('room_id'))]
+
+            ls=df.loc[df['id'].isin(mylist)]
+            buttons = []
+            myelements=[]
+            print(tracker.get_slot('room_id'))
+            print(ls)
+            for index, row in ls.iterrows():
+                print("I am in for")
+                dispatcher.utter_message(text = row['name'])
+                dispatcher.utter_message(text = row['price'])
+                dispatcher.utter_message(image = row['picture_url'])
+                dispatcher.utter_message(text = row['description'])
+                # print(tracker.get_slot('room_id'))
+                # print("hello")
+            
+            return []
+
+class ActionGetSuggestion(Action):
+
+    def name(self) -> Text:
         return "action_get_suggestion"
 
     def run(self, dispatcher: CollectingDispatcher,
@@ -24,27 +52,45 @@ class ActionGetSuggestion(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         excel_file = 'hongkong.csv'
         df = pd.read_csv(excel_file)
-        mylist=[10]
+        mylist=[1]
 
         ls=df.loc[df['accommodates'].isin(mylist)]
         buttons = []
         myelements=[]
         for index, row in ls.iterrows():
-            # print(row['accommodates'], row['amenities'])
-            # payload = "/product{\"product_id\":\"" + str(row['id']) + "\"}"
+            # print(row['id'])
+            # print('1.+++++++++++++++++++++++++++++++++++++++')
+            # print(row['listing_url'])
+            # print('2.+++++++++++++++++++++++++++++++++++++++')
+            # print(row['name'])
+            # print('3.+++++++++++++++++++++++++++++++++++++++')
+            # # print(row['description'])
+            # # print('4. +++++++++++++++++++++++++++++++++++++++')
+            # print(row['picture_url'])
+            # print('4. +++++++++++++++++++++++++++++++++++++++')
+            # print(row['listing_url'])
+            # print('5. +++++++++++++++++++++++++++++++++++++++')
+            payload = "/room{\"room_id\":\"" + str(row['id']) + "\"}"
         
             newobj={
                     "title": row['name'],
-                    "subtitle": row['description'],
+                    "subtitle": row['name'],
                     "image_url": row['picture_url'],
                     "buttons": [ 
                         {
-                        "title": "Buy now",
+                        "title": "View",
                         "url": row['listing_url'],
                         "type": "web_url"
                         # "type": "postback",
                         # "payload":payload
-                        }
+                        },
+                        {
+                        "title": "View More",
+                        # "url": row['listing_url'],
+                        # "type": "web_url"
+                        "type": "postback",
+                        "payload":payload
+                        },
                     ]
                 }
             myelements.append(newobj)
